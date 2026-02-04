@@ -1,6 +1,7 @@
 import api from "../../Api";
 import {registerError, registerRequest, registerSuccess} from "../action/registerActions";
 import {toast} from "react-toastify";
+import {loginError, loginRequest} from "../action/loginActions";
 
 export const register = (formData, navigate) => {
     return async (dispatch) => {
@@ -21,7 +22,6 @@ export const register = (formData, navigate) => {
             toast.success(response.data.message || "User registered successfully.");
 
             if (navigate) navigate("/");
-
         } catch (error) {
             const message = error.response?.data?.message || error.message || 'Registration failed';
             dispatch(registerError(message));
@@ -31,5 +31,24 @@ export const register = (formData, navigate) => {
 };
 
 export const login = (formData, navigate) => {
+    return async (dispatch) => {
+        dispatch(loginRequest());
+        try{
+            const response = await api.post('/auth/login', {
+                name: formData.name,
+                email: formData.email,
+            })
 
+            dispatch(registerSuccess(response.data.user));
+
+            localStorage.setItem('token', response.data.token);
+            localStorage.setItem('user', JSON.stringify(response.data.user));
+
+            if (navigate) navigate("/");
+        }catch(error){
+            const message = error.response?.data?.message || error.message || 'Login failed';
+            dispatch(loginError(message));
+            toast.error(message);
+        }
+    }
 }
