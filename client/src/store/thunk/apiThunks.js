@@ -1,15 +1,16 @@
-const {registerRequest, registerSuccess, registerError} = require("../action/registerActions");
-const {toast} = require("react-toastify");
+import api from "../../Api";
+import {registerError, registerRequest, registerSuccess} from "../action/registerActions";
+import {toast} from "react-toastify";
 
 export const register = (formData, navigate) => {
     return async (dispatch) => {
         dispatch(registerRequest());
         try {
-            let api;
             const response = await api.post('/auth/register', {
                 name: formData.name,
                 email: formData.email,
                 password: formData.password,
+                role: formData.role,
             });
 
             dispatch(registerSuccess(response.data.user));

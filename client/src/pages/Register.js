@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {toast} from "react-toastify";
 import {useDispatch, useSelector} from "react-redux";
-import { register } from "../store/thunk/apiThunks";
+import {register} from "../store/thunk/apiThunks";
 import Loader from "../components/Loader";
 import "../assets/css/register.css"
 import {Link, useNavigate} from "react-router-dom";
@@ -15,10 +15,11 @@ function Register() {
         email: "",
         password: "",
         confirmPassword: "",
+        role: ""
     });
 
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        setFormData({...formData, [e.target.name]: e.target.value});
     }
 
     const handleSubmit = (e) => {
@@ -30,7 +31,7 @@ function Register() {
         dispatch(register(formData, navigate));
     };
 
-    if (loading) return <Loader />;
+    if (loading) return <Loader/>;
 
     return (
         <div className="auth-page">
@@ -55,6 +56,18 @@ function Register() {
                         <input name="confirmPassword" placeholder="Confirm Password" type="password"
                                onChange={handleChange} required/>
                     </div>
+
+                    <select
+                        className="auth-select"
+                        name="role"
+                        value={formData.role}
+                        onChange={handleChange}
+                        required
+                    >
+                        <option value="" disabled>Select Role</option>
+                        <option value="buyer">Buyer</option>
+                        <option value="seller">Seller</option>
+                    </select>
 
                     <button type="submit" className="auth-submit-btn">Register</button>
 

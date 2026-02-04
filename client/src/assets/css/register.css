@@ -116,6 +116,36 @@
     text-decoration: underline;
 }
 
+.auth-select {
+    width: 100%;
+    padding: 16px 20px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    background: #fff;
+    color: #2d3748;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a0aec0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 20px center;
+    background-size: 16px;
+    cursor: pointer;
+}
+
+.auth-select:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+    transform: translateY(-2px);
+}
+
+.auth-select:invalid {
+    color: #a0aec0;
+}
+
 @media (max-width: 768px) {
     .auth-card {
         padding: 40px 30px;
@@ -138,6 +168,11 @@
     .auth-submit-btn {
         padding: 14px;
         font-size: 15px;
+    }
+
+    .auth-select {
+        padding: 14px 18px;
+        font-size: 14px;
     }
 }
 
