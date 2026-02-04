@@ -17,7 +17,7 @@ export const register = (formData, navigate) => {
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('user', JSON.stringify(response.data.user));
 
-            toast.success(response.data.message || "Успешная регистрация!");
+            toast.success(response.data.message || "User registered successfully.");
 
             if (navigate) navigate("/");
 
@@ -28,3 +28,7 @@ export const register = (formData, navigate) => {
         }
     };
 };
+
+export const login = (formData, navigate) => {
+
+}
