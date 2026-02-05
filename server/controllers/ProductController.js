@@ -83,23 +83,22 @@ class ProductController {
     }
 
     static getMyProducts = async (req, res) => {
-        try{
-            const {id} = req.user;
+        try {
+            const { id } = req.user;
 
-            const myProducts = await Product.find({ seller: id });
+            const products = await Product.find({ seller: id }).sort({createdAt: -1});
 
             return res.status(200).json({
-                message: "My products",
-                myProducts,
-                count: myProducts.length
-            })
-        }catch(err){
-            res.status(500).json({
-                message: "Failed to find my products",
-                error: err.message
-            })
+                products,
+                count: products.length,
+            });
+        } catch (err) {
+            return res.status(500).json({
+                message: "Failed to fetch products",
+            });
         }
-    }
+    };
+
 
     static updateProduct = async (req, res) => {
         try {

@@ -20,7 +20,8 @@ function Login() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(login(formData, navigate));
+        dispatch(login(formData));
+        navigate("/");
     }
 
     if (loading) return <Loader />;

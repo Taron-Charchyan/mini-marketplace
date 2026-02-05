@@ -3,7 +3,7 @@ import {registerError, registerRequest, registerSuccess} from "../action/registe
 import {toast} from "react-toastify";
 import {loginError, loginRequest, loginSuccess} from "../action/loginActions"; // проверь этот импорт
 
-export const register = (formData, navigate) => {
+export const register = (formData) => {
     return async (dispatch) => {
         dispatch(registerRequest());
         try {
@@ -20,9 +20,6 @@ export const register = (formData, navigate) => {
             localStorage.setItem('user', JSON.stringify(data.user));
 
             toast.success(data.message || "User registered successfully.");
-
-            if (navigate) navigate("/");
-            console.log("qwerty")
         } catch (error) {
             const message = error.response?.data?.message || error.message || 'Registration failed';
             dispatch(registerError(message));
@@ -31,7 +28,7 @@ export const register = (formData, navigate) => {
     };
 };
 
-export const login = (formData, navigate) => {
+export const login = (formData) => {
     return async (dispatch) => {
         dispatch(loginRequest());
         try {
@@ -46,8 +43,6 @@ export const login = (formData, navigate) => {
             localStorage.setItem('user', JSON.stringify(data.user));
 
             toast.success(data.message || "Welcome back!");
-
-            if (navigate) navigate("/");
         } catch (error) {
             const message = error.response?.data?.message || error.message || 'Login failed';
             dispatch(loginError(message));

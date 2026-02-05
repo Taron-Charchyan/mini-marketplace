@@ -29,7 +29,8 @@ function Register() {
             return toast.warn("Passwords don't match");
         }
 
-        dispatch(register(formData, navigate));
+        dispatch(register(formData));
+        navigate("/");
     };
 
     if (loading) return <Loader/>;
