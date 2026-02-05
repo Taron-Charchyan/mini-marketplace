@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import {toast} from "react-toastify";
 import {useDispatch, useSelector} from "react-redux";
-import {register} from "../store/thunk/apiThunks";
+import {register} from "../store/thunk/authThunks";
 import Loader from "../components/Loader";
-import "../assets/css/register.css"
 import {Link, useNavigate} from "react-router-dom";
+import "../assets/css/auth.css"
+
 
 function Register() {
     const navigate = useNavigate();

@@ -1,27 +1,28 @@
 import api from "../../Api";
 import {registerError, registerRequest, registerSuccess} from "../action/registerActions";
 import {toast} from "react-toastify";
-import {loginError, loginRequest} from "../action/loginActions";
+import {loginError, loginRequest, loginSuccess} from "../action/loginActions"; // проверь этот импорт
 
 export const register = (formData, navigate) => {
     return async (dispatch) => {
         dispatch(registerRequest());
         try {
-            const response = await api.post('/auth/register', {
+            const {data} = await api.post('/auth/register', {
                 name: formData.name,
                 email: formData.email,
                 password: formData.password,
                 role: formData.role,
             });
 
-            dispatch(registerSuccess(response.data.user));
+            dispatch(registerSuccess(data.user));
 
-            localStorage.setItem('token', response.data.token);
-            localStorage.setItem('user', JSON.stringify(response.data.user));
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('user', JSON.stringify(data.user));
 
-            toast.success(response.data.message || "User registered successfully.");
+            toast.success(data.message || "User registered successfully.");
 
             if (navigate) navigate("/");
+            console.log("qwerty")
         } catch (error) {
             const message = error.response?.data?.message || error.message || 'Registration failed';
             dispatch(registerError(message));
@@ -33,19 +34,21 @@ export const register = (formData, navigate) => {
 export const login = (formData, navigate) => {
     return async (dispatch) => {
         dispatch(loginRequest());
-        try{
-            const response = await api.post('/auth/login', {
-                name: formData.name,
+        try {
+            const {data} = await api.post('/auth/login', {
                 email: formData.email,
-            })
+                password: formData.password,
+            });
 
-            dispatch(registerSuccess(response.data.user));
+            dispatch(loginSuccess(data.user));
 
-            localStorage.setItem('token', response.data.token);
-            localStorage.setItem('user', JSON.stringify(response.data.user));
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('user', JSON.stringify(data.user));
+
+            toast.success(data.message || "Welcome back!");
 
             if (navigate) navigate("/");
-        }catch(error){
+        } catch (error) {
             const message = error.response?.data?.message || error.message || 'Login failed';
             dispatch(loginError(message));
             toast.error(message);

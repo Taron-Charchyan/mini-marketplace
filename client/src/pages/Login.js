@@ -1,12 +1,27 @@
 import React, {useState} from 'react';
 import Loader from "../components/Loader";
+import {useDispatch, useSelector} from "react-redux";
+import {login} from "../store/thunk/authThunks";
+import {Link, useNavigate} from "react-router-dom";
+import "../assets/css/auth.css"
 
 function Login() {
     const [formData, setFormData] = useState({
         email: "",
         password: "",
     })
+    const dispatch = useDispatch();
+    const {loading} = useSelector(state => state.login);
+    const navigate = useNavigate();
 
+    const handleChange = (e) => {
+        setFormData({...formData, [e.target.name]: e.target.value});
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        dispatch(login(formData, navigate));
+    }
 
     if (loading) return <Loader />;
 
@@ -19,18 +34,20 @@ function Login() {
 
                     <div className="input-group">
                         <input
+                            name="email"
                             type="email"
                             placeholder="Email"
-                            onChange={e => setFormData({...formData, email: e.target.value})}
+                            onChange={handleChange}
                             required
                         />
                     </div>
 
                     <div className="input-group">
                         <input
+                            name="password"
                             type="password"
                             placeholder="Password"
-                            onChange={e => setFormData({...formData, password: e.target.value})}
+                            onChange={handleChange}
                             required
                         />
                     </div>
