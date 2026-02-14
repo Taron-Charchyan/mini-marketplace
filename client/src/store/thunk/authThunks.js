@@ -1,7 +1,7 @@
 import api from "../../Api";
-import {registerError, registerRequest, registerSuccess} from "../action/registerActions";
+import {registerError, registerRequest, registerSuccess} from "../action/registerAction";
 import {toast} from "react-toastify";
-import {loginError, loginRequest, loginSuccess} from "../action/loginActions"; // проверь этот импорт
+import {loginError, loginRequest, loginSuccess} from "../action/loginAction"; // проверь этот импорт
 
 export const register = (formData) => {
     return async (dispatch) => {

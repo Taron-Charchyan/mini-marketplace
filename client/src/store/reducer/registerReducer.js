@@ -2,7 +2,7 @@ import {
     REGISTER_REQUEST,
     REGISTER_SUCCESS,
     REGISTER_ERROR
-} from "../action/registerActions";
+} from "../action/registerAction";
 
 const initialState = {
     user: null,

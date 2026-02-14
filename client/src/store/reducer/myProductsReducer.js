@@ -2,7 +2,7 @@ import {
     MYPRODUCTS_REQUEST,
     MYPRODUCTS_SUCCESS,
     MYPRODUCTS_ERROR,
-} from "../action/myProductsActions";
+} from "../action/myProductsAction";
 
 const initialState = {
     products: [],

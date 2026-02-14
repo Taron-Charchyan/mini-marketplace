@@ -1,0 +1,231 @@
+.add-product-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1rem;
+    overflow-y: auto;
+}
+
+.add-product-container {
+    position: relative;
+    max-width: 500px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.close-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: transparent;
+    border: none;
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+    color: #666;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+.close-button:hover {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.add-product-container form {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+}
+
+.add-product-container h2 {
+    margin: 0 0 1.5rem 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    text-align: center;
+    padding-right: 2rem;
+}
+
+.input-group {
+    margin-bottom: 1.25rem;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #333;
+}
+
+.input-group input,
+.input-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 0.95rem;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+.input-group input:focus,
+.input-group textarea:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+.input-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.input-group input[type="file"] {
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+.input-group input[type="file"]::file-selector-button {
+    padding: 0.5rem 1rem;
+    margin-right: 0.75rem;
+    background: #f5f5f5;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s ease;
+}
+
+.input-group input[type="file"]::file-selector-button:hover {
+    background: #e8e8e8;
+}
+
+.price-input-wrapper {
+    display: flex;
+    align-items: center;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 8px;
+    padding-left: 0.75rem;
+    transition: all 0.2s ease;
+}
+
+.price-input-wrapper:focus-within {
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+.currency-symbol {
+    color: #666;
+    font-weight: 500;
+    margin-right: 0.5rem;
+}
+
+.price-input-wrapper input {
+    border: none;
+    padding: 0.75rem;
+    padding-left: 0;
+    flex: 1;
+}
+
+.price-input-wrapper input:focus {
+    box-shadow: none;
+    border: none;
+}
+
+.add-product-container button[type="submit"] {
+    width: 100%;
+    padding: 0.875rem;
+    background: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 0.5rem;
+}
+
+.add-product-container button[type="submit"]:hover:not(:disabled) {
+    background: #357abd;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+}
+
+.add-product-container button[type="submit"]:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.add-product-container button[type="submit"]:disabled {
+    background: #b0b0b0;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+@media (max-width: 640px) {
+    .add-product-overlay {
+        padding: 0.5rem;
+    }
+
+    .add-product-container {
+        max-height: 95vh;
+    }
+
+    .add-product-container form {
+        padding: 1.5rem;
+    }
+
+    .add-product-container h2 {
+        font-size: 1.25rem;
+    }
+
+    .input-group label {
+        font-size: 0.85rem;
+    }
+
+    .input-group input,
+    .input-group textarea {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .add-product-container form {
+        padding: 1.25rem;
+    }
+
+    .input-group input[type="file"]::file-selector-button {
+        padding: 0.4rem 0.75rem;
+        font-size: 0.85rem;
+    }
+}
