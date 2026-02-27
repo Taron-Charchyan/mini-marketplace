@@ -2,7 +2,7 @@ import {
     ADD_PRODUCT_REQUEST,
     ADD_PRODUCT_SUCCESS,
     ADD_PRODUCT_ERROR,
-} from "../action/addProductAction";
+} from "../thunk/productsThunks";
 
 const initialState = {
     product: null,

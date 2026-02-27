@@ -1,8 +1,8 @@
 import {
-    PRODUCTBYID_REQUEST,
-    PRODUCTBYID_SUCCESS,
-    PRODUCTBYID_ERROR
-} from "../action/prByIdAction";
+    PRODUCT_BY_ID_REQUEST,
+    PRODUCT_BY_ID_SUCCESS,
+    PRODUCT_BY_ID_ERROR
+} from "../thunk/productsThunks";
 
 const initialState = {
     product: null,
@@ -12,11 +12,11 @@ const initialState = {
 
 export default function productByIdReducer(state = initialState, action) {
     switch(action.type) {
-        case PRODUCTBYID_REQUEST:
+        case PRODUCT_BY_ID_REQUEST:
             return { ...state, loading: true, error: null };
-        case PRODUCTBYID_SUCCESS:
+        case PRODUCT_BY_ID_SUCCESS:
             return { ...state, loading: false, product: action.payload };
-        case PRODUCTBYID_ERROR:
+        case PRODUCT_BY_ID_ERROR:
             return { ...state, loading: false, error: action.payload };
         default:
             return state;

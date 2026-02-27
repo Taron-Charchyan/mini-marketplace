@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {register} from "../store/thunk/authThunks";
 import Loader from "../components/Loader";
 import {Link, useNavigate} from "react-router-dom";
-import "../assets/css/auth.css"
+import styles from "../assets/css/Auth.module.css";
 
 
 function Register() {
@@ -36,31 +36,31 @@ function Register() {
     if (loading) return <Loader/>;
 
     return (
-        <div className="auth-page">
-            <div className="auth-card">
-                <form className="auth-form" onSubmit={handleSubmit}>
+        <div className={styles["auth-page"]}>
+            <div className={styles["auth-card"]}>
+                <form className={styles["auth-form"]} onSubmit={handleSubmit}>
                     <h2>Create Account</h2>
-                    <p className="subtitle">Join our community today</p>
+                    <p className={styles["subtitle"]}>Join our community today</p>
 
-                    <div className="input-group">
+                    <div className={styles["input-group"]}>
                         <input name="name" placeholder="Full Name" type="text" onChange={handleChange} required/>
                     </div>
 
-                    <div className="input-group">
+                    <div className={styles["input-group"]}>
                         <input name="email" placeholder="Email Address" type="email" onChange={handleChange} required/>
                     </div>
 
-                    <div className="input-group">
+                    <div className={styles["input-group"]}>
                         <input name="password" placeholder="Password" type="password" onChange={handleChange} required/>
                     </div>
 
-                    <div className="input-group">
+                    <div className={styles["input-group"]}>
                         <input name="confirmPassword" placeholder="Confirm Password" type="password"
                                onChange={handleChange} required/>
                     </div>
 
                     <select
-                        className="auth-select"
+                        className={styles["auth-select"]}
                         name="role"
                         value={formData.role}
                         onChange={handleChange}
@@ -71,9 +71,9 @@ function Register() {
                         <option value="seller">Seller</option>
                     </select>
 
-                    <button type="submit" className="auth-submit-btn">Register</button>
+                    <button type="submit" className={styles["auth-submit-btn"]}>Register</button>
 
-                    <p className="auth-footer">
+                    <p className={styles["auth-footer"]}>
                         Already have an account? <Link replace to="/login">Login</Link>
                     </p>
                 </form>

@@ -2,7 +2,7 @@ import {
     REGISTER_REQUEST,
     REGISTER_SUCCESS,
     REGISTER_ERROR
-} from "../action/registerAction";
+} from "../thunk/authThunks";
 
 const initialState = {
     user: null,

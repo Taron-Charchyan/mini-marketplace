@@ -1,8 +1,8 @@
 import {
-    MYPRODUCTS_REQUEST,
-    MYPRODUCTS_SUCCESS,
-    MYPRODUCTS_ERROR,
-} from "../action/myProductsAction";
+    MY_PRODUCTS_REQUEST,
+    MY_PRODUCTS_SUCCESS,
+    MY_PRODUCTS_ERROR,
+} from "../thunk/productsThunks";
 
 const initialState = {
     products: [],
@@ -12,11 +12,11 @@ const initialState = {
 
 export default function myProductsReducer(state = initialState, action) {
     switch(action.type) {
-        case MYPRODUCTS_REQUEST:
+        case MY_PRODUCTS_REQUEST:
             return { ...state, loading: true, error: null };
-        case MYPRODUCTS_SUCCESS:
+        case MY_PRODUCTS_SUCCESS:
             return { ...state, loading: false, products: action.payload };
-        case MYPRODUCTS_ERROR:
+        case MY_PRODUCTS_ERROR:
             return { ...state, loading: false, error: action.payload };
         default:
             return state;

@@ -41,3 +41,6 @@ ehthumbs.db
 *.swp
 *.swo
 *~
+
+# Product images
+server/public/uploads/products/*.png

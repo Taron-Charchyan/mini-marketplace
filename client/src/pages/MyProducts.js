@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import Loader from "../components/Loader";
 import {useDispatch, useSelector} from "react-redux";
 import {getMyProducts} from "../store/thunk/productsThunks";
-import "../assets/css/myProducts.css"
+import styles from "../assets/css/MyProducts.module.css";
 import AddProduct from "../components/AddProduct";
 
 function MyProducts() {
@@ -19,43 +19,50 @@ function MyProducts() {
     if (loading) return <Loader/>;
 
     return (
-        <div className="products-page">
-            <div className="products-header">
+        <div className={styles["products-page"]}>
+            <div className={styles["products-header"]}>
                 <h1>My Products</h1>
-                <button className="add-product-btn" onClick={() => setAPO(true)}>
+                <button
+                    className={styles["add-product-btn"]}
+                    onClick={() => setAPO(true)}
+                >
                     + Add Product
                 </button>
             </div>
 
             {aPO && <AddProduct onClose={() => setAPO(false)} />}
 
-            <div className="product-list">
+            <div className={styles["product-list"]}>
                 {products.length === 0 && (
-                    <p className="products-empty">No products yet</p>
+                    <p className={styles["products-empty"]}>No products yet</p>
                 )}
 
                 {products.map((product) => (
                     <Link
                         key={product._id}
                         to={`/prById/${product._id}`}
-                        className="product-card-link"
+                        className={styles["product-card-link"]}
                     >
-                        <div className="product-card">
-                            <div className="product-image">
+                        <div className={styles["product-card"]}>
+                            <div className={styles["product-image"]}>
                                 <img
-                                    src={product.images?.[0]
-                                        ? `${API_URL}${product.images[0]}`
-                                        : "/no-image.png"}
+                                    src={
+                                        product.images?.[0]
+                                            ? `${API_URL}${product.images[0]}`
+                                            : "/no-image.png"
+                                    }
                                     alt={product.title}
                                 />
                             </div>
-                            <div className="product-description">
-                                <p className="product-title">{product.title}</p>
-                                <p className="product-text">{product.description}</p>
+                            <div className={styles["product-description"]}>
+                                <p className={styles["product-title"]}>
+                                    {product.title}
+                                </p>
                             </div>
-                            <div className="product-meta">
-                                <p className="product-price">${product.price}</p>
-                                <p className="product-stock">Stock: {product.stock}</p>
+                            <div className={styles["product-meta"]}>
+                                <p className={styles["product-price"]}>
+                                    ${product.price}
+                                </p>
                             </div>
                         </div>
                     </Link>

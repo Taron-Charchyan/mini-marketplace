@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {addProduct} from "../store/thunk/productsThunks";
 import Loader from "./Loader";
-import "../assets/css/addProduct.css"
+import styles from "../assets/css/AddProduct.module.css";
 
 function AddProduct({onClose}) {
     const dispatch = useDispatch();
@@ -66,10 +66,10 @@ function AddProduct({onClose}) {
     if (loading) return <Loader />;
 
     return (
-        <div className="add-product-overlay" onClick={handleBackdropClick}>
-            <div className="add-product-container">
+        <div className={styles["add-product-overlay"]} onClick={handleBackdropClick}>
+            <div className={styles["add-product-container"]}>
                 <button
-                    className="close-button"
+                    className={styles["close-button"]}
                     onClick={onClose}
                     type="button"
                 >
@@ -79,7 +79,7 @@ function AddProduct({onClose}) {
                 <form onSubmit={handleSubmit}>
                     <h2>Add new product</h2>
 
-                    <div className="input-group">
+                    <div className={styles["input-group"]}>
                         <label htmlFor="title">Title</label>
                         <input
                             id="title"
@@ -91,7 +91,7 @@ function AddProduct({onClose}) {
                         />
                     </div>
 
-                    <div className="input-group">
+                    <div className={styles["input-group"]}>
                         <label htmlFor="description">Description</label>
                         <textarea
                             id="description"
@@ -105,10 +105,10 @@ function AddProduct({onClose}) {
                         />
                     </div>
 
-                    <div className="input-group">
+                    <div className={styles["input-group"]}>
                         <label htmlFor="price">Price</label>
-                        <div className="price-input-wrapper">
-                            <span className="currency-symbol">$</span>
+                        <div className={styles["price-input-wrapper"]}>
+                            <span className={styles["currency-symbol"]}>$</span>
                             <input
                                 id="price"
                                 name="price"
@@ -122,7 +122,7 @@ function AddProduct({onClose}) {
                         </div>
                     </div>
 
-                    <div className="input-group">
+                    <div className={styles["input-group"]}>
                         <label htmlFor="images">Images</label>
                         <input
                             id="images"
@@ -136,7 +136,7 @@ function AddProduct({onClose}) {
                         />
                     </div>
 
-                    <div className="input-group">
+                    <div className={styles["input-group"]}>
                         <label htmlFor="stock">Stock</label>
                         <input
                             id="stock"
@@ -150,7 +150,11 @@ function AddProduct({onClose}) {
                         />
                     </div>
 
-                    <button type="submit" disabled={loading}>
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className={styles["submit-button"]}
+                    >
                         {loading ? 'Adding...' : 'Add Product'}
                     </button>
                 </form>

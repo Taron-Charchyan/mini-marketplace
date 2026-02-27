@@ -3,7 +3,7 @@ import Loader from "../components/Loader";
 import {useDispatch, useSelector} from "react-redux";
 import {login} from "../store/thunk/authThunks";
 import {Link, useNavigate} from "react-router-dom";
-import "../assets/css/auth.css"
+import styles from "../assets/css/Auth.module.css";
 
 function Login() {
     const [formData, setFormData] = useState({
@@ -27,35 +27,23 @@ function Login() {
     if (loading) return <Loader />;
 
     return (
-        <div className="auth-page">
-            <div className="auth-card">
-                <form className="auth-form" onSubmit={handleSubmit}>
+        <div className={styles["auth-page"]}>
+            <div className={styles["auth-card"]}>
+                <form className={styles["auth-form"]} onSubmit={handleSubmit}>
                     <h2>Welcome Back</h2>
-                    <p className="subtitle">Please enter your details</p>
+                    <p className={styles["subtitle"]}>Please enter your details</p>
 
-                    <div className="input-group">
-                        <input
-                            name="email"
-                            type="email"
-                            placeholder="Email"
-                            onChange={handleChange}
-                            required
-                        />
+                    <div className={styles["input-group"]}>
+                        <input name="email" type="email" placeholder="Email" onChange={handleChange} required/>
                     </div>
 
-                    <div className="input-group">
-                        <input
-                            name="password"
-                            type="password"
-                            placeholder="Password"
-                            onChange={handleChange}
-                            required
-                        />
+                    <div className={styles["input-group"]}>
+                        <input name="password" type="password" placeholder="Password" onChange={handleChange} required/>
                     </div>
 
-                    <button type="submit" className="auth-submit-btn">Sign In</button>
+                    <button type="submit" className={styles["auth-submit-btn"]}>Sign In</button>
 
-                    <p className="auth-footer">
+                    <p className={styles["auth-footer"]}>
                         Don't have an account? <Link replace to="/register">Sign Up</Link>
                     </p>
                 </form>

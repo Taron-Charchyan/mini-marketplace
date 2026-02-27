@@ -2,7 +2,7 @@ import {
     LOGIN_REQUEST,
     LOGIN_SUCCESS,
     LOGIN_ERROR,
-} from "../action/loginAction";
+} from "../thunk/authThunks";
 
 const initialState = {
     user: null,

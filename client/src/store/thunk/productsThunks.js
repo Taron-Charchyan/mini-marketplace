@@ -1,21 +1,38 @@
 import api from "../../Api";
 import {toast} from "react-toastify";
-import {myProductsError, myProductsRequest, myProductsSuccess} from "../action/myProductsAction";
-import {productByIdError, productByIdRequest, productByIdSuccess} from "../action/prByIdAction";
-import {addProductError, addProductRequest, addProductSuccess} from "../action/addProductAction";
+
+export const ADD_PRODUCT_REQUEST = "ADD_PRODUCT_REQUEST";
+export const ADD_PRODUCT_SUCCESS = "ADD_PRODUCT_SUCCESS";
+export const ADD_PRODUCT_ERROR = "ADD_PRODUCT_ERROR";
+
+export const MY_PRODUCTS_REQUEST = "MY_PRODUCTS_REQUEST"
+export const MY_PRODUCTS_SUCCESS = "MY_PRODUCTS_SUCCESS"
+export const MY_PRODUCTS_ERROR = "MY_PRODUCTS_ERROR"
+
+export const PRODUCT_BY_ID_REQUEST = "PRODUCT_BY_ID_REQUEST";
+export const PRODUCT_BY_ID_SUCCESS = "PRODUCT_BY_ID_SUCCESS";
+export const PRODUCT_BY_ID_ERROR = "PRODUCT_BY_ID_ERROR";
 
 export const getMyProducts = () => {
     return async (dispatch) => {
-        dispatch(myProductsRequest());
+        dispatch({
+            type: MY_PRODUCTS_REQUEST
+        });
 
         try {
             const {data} = await api.get('/products/my');
 
-            dispatch(myProductsSuccess(data.products));
+            dispatch({
+                type: MY_PRODUCTS_SUCCESS,
+                payload: data.products
+            });
 
         } catch(error) {
             const message = error.response?.data?.message || error.message || "Something went wrong";
-            dispatch(myProductsError(message));
+            dispatch({
+                type: MY_PRODUCTS_ERROR,
+                payload: message
+            });
             toast.error(message);
         }
     }
@@ -23,15 +40,23 @@ export const getMyProducts = () => {
 
 export const getProductById = (id) => {
     return async (dispatch) => {
-        dispatch(productByIdRequest());
+        dispatch({
+            type: PRODUCT_BY_ID_REQUEST
+        });
 
         try {
             const {data} = await api.get(`/products/getById/${id}`);
 
-            dispatch(productByIdSuccess(data.product));
+            dispatch({
+                type: PRODUCT_BY_ID_SUCCESS,
+                payload: data.product
+            });
         } catch(error) {
             const message = error.response?.data?.message || error.message || "Something went wrong";
-            dispatch(productByIdError(message));
+            dispatch({
+                type: PRODUCT_BY_ID_ERROR,
+                payload: message
+            });
             toast.error(message);
         }
     }
@@ -39,11 +64,16 @@ export const getProductById = (id) => {
 
 export const addProduct = (formDataToSend) => {
     return async (dispatch) => {
-        dispatch(addProductRequest());
+        dispatch({
+            type: ADD_PRODUCT_REQUEST
+        });
         try {
             const response = await api.post('/products/add', formDataToSend);
 
-            dispatch(addProductSuccess(response.data));
+            dispatch({
+                type: ADD_PRODUCT_SUCCESS,
+                payload: response.data
+            });
             toast.success('Product added successfully!');
 
             dispatch(getMyProducts());
@@ -51,7 +81,10 @@ export const addProduct = (formDataToSend) => {
             return { success: true };
         } catch (error) {
             const message = error.response?.data?.message || error.message || 'Failed to add product';
-            dispatch(addProductError(message));
+            dispatch({
+                type: ADD_PRODUCT_ERROR,
+                payload: message
+            });
             toast.error(message);
             return { success: false };
         }

@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { getProductById } from "../store/thunk/productsThunks";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import '../assets/css/prById.css';
+import styles from "../assets/css/PrById.module.css";
 
 function ProductById() {
     const API_URL = 'http://localhost:8080';
@@ -23,7 +23,6 @@ function ProductById() {
     }, [dispatch, id]);
 
     const handleThumbnailClick = (index) => {
-        setSelectedImage(index);
         if (carouselRef.current) {
             carouselRef.current.goToSlide(index);
         }
@@ -38,48 +37,46 @@ function ProductById() {
 
     const images = product.images || [];
 
+    if (images.length === 0) {
+        return <div>No images</div>;
+    }
+
     return (
-        <div className="product-page">
-            <div className="product-container">
-                <div className="product-images">
+        <div className={styles["product-page"]}>
+            <div className={styles["product-container"]}>
+                <div className={styles["product-images"]}>
                     <Carousel
+                        key={images.length}
                         ref={carouselRef}
                         responsive={responsive}
-                        infinite={true}
+                        infinite={false}
                         autoPlay={false}
                         showDots={false}
                         arrows={true}
                         swipeable={true}
                         draggable={true}
-                        afterChange={(previousSlide, { currentSlide }) => {
-                            const realIndex = currentSlide % images.length;
-                            setSelectedImage(realIndex);
+                        beforeChange={(nextSlide) => {
+                            setSelectedImage(nextSlide);
                         }}
                     >
-                        {images.length > 0 ? (
-                            images.map((image, index) => (
-                                <div key={index} className="carousel-image-wrapper">
-                                    <img
-                                        src={`${API_URL}${image}`}
-                                        alt={product.title}
-                                        className="carousel-image"
-                                        onError={(e) => { e.target.src = "/placeholder-image.jpg"; }}
-                                    />
-                                </div>
-                            ))
-                        ) : (
-                            <div className="carousel-image-wrapper">
-                                <img src="/placeholder-image.jpg" alt="Placeholder" className="carousel-image" />
+                        {images.map((image, index) => (
+                            <div key={index} className={styles["carousel-image-wrapper"]}>
+                                <img
+                                    src={`${API_URL}${image}`}
+                                    alt={product.title}
+                                    className={styles["carousel-image"]}
+                                    onError={(e) => { e.target.src = "/placeholder-image.jpg"; }}
+                                />
                             </div>
-                        )}
+                        ))}
                     </Carousel>
 
                     {images.length > 1 && (
-                        <div className="thumbnail-container">
+                        <div className={styles["thumbnail-container"]}>
                             {images.map((image, index) => (
                                 <div
                                     key={index}
-                                    className={`thumbnail ${selectedImage === index ? 'active' : ''}`}
+                                    className={`${styles.thumbnail} ${selectedImage === index ? styles.active : ""}`}
                                     onClick={() => handleThumbnailClick(index)}
                                 >
                                     <img src={`${API_URL}${image}`} alt="thumb" />
@@ -89,27 +86,27 @@ function ProductById() {
                     )}
                 </div>
 
-                <div className="product-details">
-                    <h1 className="product-title">{product.title}</h1>
+                <div className={styles["product-details"]}>
+                    <h1 className={styles["product-title"]}>{product.title}</h1>
 
-                    <div className="product-price-stock">
-                        <span className="product-price">${product.price}</span>
-                        <span className={`product-stock ${product.stock > 0 ? 'in-stock' : 'out-of-stock'}`}>
-                            {product.stock > 0 ? `In Stock: ${product.stock}` : 'Out of Stock'}
-                        </span>
+                    <div className={styles["product-price-stock"]}>
+                        <span className={styles["product-price"]}>${product.price}</span>
+                        <span className={`${styles["product-stock"]} ${product.stock > 0 ? styles["in-stock"] : styles["out-of-stock"]}`}>
+                    {product.stock > 0 ? `In Stock: ${product.stock}` : 'Out of Stock'}
+                </span>
                     </div>
 
-                    <div className="product-description">
+                    <div className={styles["product-description"]}>
                         <h2>Description</h2>
                         <p>{product.description}</p>
                     </div>
 
                     {!isSeller && (
-                        <div className="product-actions">
-                            <button className="btn-add-to-cart" disabled={product.stock === 0}>
+                        <div className={styles["product-actions"]}>
+                            <button className={styles["btn-add-to-cart"]} disabled={product.stock === 0}>
                                 {product.stock > 0 ? 'Add to Cart' : 'Out of Stock'}
                             </button>
-                            <button className="btn-buy-now" disabled={product.stock === 0}>
+                            <button className={styles["btn-buy-now"]} disabled={product.stock === 0}>
                                 Buy Now
                             </button>
                         </div>
